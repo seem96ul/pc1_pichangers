@@ -26,16 +26,19 @@ public class EquiposPresenterImpl implements EquiposPresenter{
 
     @Override
     public void obtenerEquipos() {
+        Log.i("mensaje","1+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://pichangers-api.mybluemix.net/rest")
+                .baseUrl("http://pichangers-api.mybluemix.net/rest/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
+        Log.i("mensaje","2++++++++++++++++++++++++++++++++++++++++");
         EquiposService service = retrofit.create(EquiposService.class);
         service.obtenerEquipos().enqueue(new Callback<List<Equipo>>() {
             @Override
             public void onResponse(Call<List<Equipo>> call, Response<List<Equipo>> response) {
                 mView.mostrarListadoEquipos(response.body());
+                Log.i("mensaje", "3+++++++++++++++++++++++++++++++++++++");
+
             }
 
             @Override

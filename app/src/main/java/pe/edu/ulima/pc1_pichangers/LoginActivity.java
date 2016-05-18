@@ -31,17 +31,22 @@ public class LoginActivity extends AppCompatActivity {
         etePassword = (EditText) findViewById(R.id.etePassword);
     }
 
-    public void obtenerUsuario(){
+    public void crearUsuario(Usuario usuario){
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://ulimers.mybluemix.net")
+                .baseUrl("http://pichangers-api.mybluemix.net/rest/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         EquiposService service = retrofit.create(EquiposService.class);
-        service.obtenerUsuarios().enqueue(new Callback<Usuario>() {
+        service.crearUsuario(usuario).enqueue(new Callback<Usuario>() {
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                usuario=response.body();
+                Context context = getApplicationContext();
+                CharSequence text = response.body().toString();
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
 
             }
 
@@ -55,17 +60,18 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginClicked(View view){
         String username = eteUsuario.getText().toString();
         String password = etePassword.getText().toString();
-        obtenerUsuario();
 
-        if (username.equals(usuario.getUsuario()) &&
-                password.equals(usuario.getPassword())){
+
+        if (username.equals("20142424") &&
+                password.equals("123")){
 
             Usuario usuario = new Usuario(username, password);
             Intent intent = new Intent(this, EquiposActivity.class);
             intent.putExtra(usuario.getUsuario(), username);
-            intent.putExtra(usuario.getUsuario(), usuario);
+            intent.putExtra(usuario.getUsuario(), "20142424");
 
             startActivity(intent);
+            crearUsuario(usuario);
         }else{
             Context context = getApplicationContext();
             CharSequence text = "Login incorrecto";

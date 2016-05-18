@@ -7,15 +7,19 @@ public class Equipo {
 
     private int id;
     private String nombre;
+    private int partidosGanados;
+    private int partidosPerdidos;
     private String urlImagen;
 
     public Equipo() {
     }
 
-    public Equipo(int id, String urlImagen, String nombre) {
+    public Equipo(int id, String nombre, int partidosGanados, int partidosPerdidos, String urlImagen) {
         this.id = id;
         this.urlImagen = urlImagen;
         this.nombre = nombre;
+        this.partidosGanados=partidosGanados;
+        this.partidosPerdidos=partidosPerdidos;
     }
 
     public int getId() {
@@ -40,5 +44,21 @@ public class Equipo {
 
     public void setUrlImagen(String urlImagen) {
         this.urlImagen = urlImagen;
+    }
+
+    public int getPartidosGanados() {
+        return partidosGanados;
+    }
+
+    public void setPartidosGanados(int partidosGanados) {
+        this.partidosGanados = partidosGanados;
+    }
+
+    public int getPartidosPerdidos() {
+        return partidosPerdidos;
+    }
+
+    public void setPartidosPerdidos(int partidosPerdidos) {
+        this.partidosPerdidos = partidosPerdidos;
     }
 }
